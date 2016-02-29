@@ -1,0 +1,16 @@
+[
+{
+  "modid": "LetsModReboot",
+  "name": "Lets Mod Reboot",
+  "description": "Pahimar's Lets Mod Reboot series",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Shoob"],
+  "credits": "Pahimar for tutorial",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
