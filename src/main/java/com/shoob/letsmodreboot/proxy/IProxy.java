@@ -1,7 +1,7 @@
 package com.shoob.letsmodreboot.proxy;
 
-/**
- * Created by Shoob on 2/26/2016.
- */
 public interface IProxy {
+    public abstract void registerRenders();
+
+    public abstract void registerKeybindings();
 }

@@ -1,7 +1,16 @@
 package com.shoob.letsmodreboot.proxy;
 
-/**
- * Created by Shoob on 2/26/2016.
- */
-public class ServerProxy {
+public class ServerProxy extends CommonProxy{
+
+    @Override
+    public void registerRenders(){
+        //Do Nothing
+    }
+
+    @Override
+    public void registerKeybindings() {
+        //do nothing
+    }
+
+
 }

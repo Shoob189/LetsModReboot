@@ -1,5 +1,5 @@
 {
-    "parent": "letsmodrebootblock/fancyBlock",
+    "parent": "letsmodreboot:block/fancyBlock",
     "display": {
         "thirdperson": {
             "rotation": [ 10, -45, 170 ],

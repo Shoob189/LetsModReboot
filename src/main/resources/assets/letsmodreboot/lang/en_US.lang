@@ -1,1 +1,13 @@
+# Keys
+keys.letsmodreboot.category=Let's Mod Reboot
+keys.letsmodreboot.charge=Charge
+keys.letsmodreboot.release=Release
+
+# Creative Tabs
+itemGroup.letsmodreboot=Let's Mod Reboot
+
+# Items
 item.letsmodreboot:fancyOrb.name=Fancy Orb
+
+# Blocks
+tile.letsmodreboot:fancyBlock.name=Fancy Block
