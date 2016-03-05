@@ -23,4 +23,5 @@ public abstract class TileEntityLMR extends TileEntity {
 
     public void readFromPacket(ByteBuf buf){}
 
+    public void onGuiButtonPress(int id){}
 }

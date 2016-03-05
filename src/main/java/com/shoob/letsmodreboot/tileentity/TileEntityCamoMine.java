@@ -15,21 +15,41 @@ import net.minecraftforge.fml.common.network.ByteBufUtils;
 
 import java.util.List;
 
-public class TileEntityCamoMine extends TileEntityLMR implements ITickable, ISidedInventory{
+public class TileEntityCamoMine extends TileEntityLMR implements ITickable, ISidedInventory {
 
     private int timer = 60;
     private ItemStack[] camoStack = new ItemStack[6];
 
     @Override
     public void update() {
-        if(timer > 0) timer--;
-        else if(!worldObj.isRemote){
+        if (timer > 0) timer--;
+        else if (timer == 0 && !worldObj.isRemote) {
             List<EntityPlayer> entities = worldObj.getEntitiesWithinAABB(EntityPlayer.class, AxisAlignedBB.fromBounds(pos.getX() - 1, pos.getY() - 1, pos.getZ() - 1, pos.getX() + 2, pos.getY() + 2, pos.getZ() + 2));
-            if(!entities.isEmpty()) {
+            if (!entities.isEmpty()) {
                 worldObj.createExplosion(null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 3.0F, true);
             }
         }
     }
+
+    public void setTimer(int value) {
+        this.timer = value;
+    }
+
+    public int getTimer(){
+        return timer;
+    }
+
+    @Override
+    public void onGuiButtonPress(int id){
+        if(id == 0){
+            if(timer == -1){ //if not armed, begin timer
+                this.setTimer(60);
+            }else{ //if armed, stop being armed
+                timer = -1;
+            }
+        }
+    }
+
 
     public void setCamoStack(ItemStack stack, int side){
         LogHelper.info("Before: " + camoStack[side]);

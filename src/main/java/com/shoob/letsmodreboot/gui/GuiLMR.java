@@ -30,7 +30,7 @@ public abstract class GuiLMR extends GuiContainer {
     @Override
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
     {
-        String s = this.inventory.getDisplayName().getUnformattedText() +".name";
+        String s = I18n.format(this.inventory.getDisplayName().getUnformattedText() +".name");
         this.fontRendererObj.drawString(s, this.xSize / 2 - this.fontRendererObj.getStringWidth(s) / 2, 6, 4210752);
         this.fontRendererObj.drawString(I18n.format("container.inventory"), 8, this.ySize - 96 + 2, 4210752);
     }

@@ -1,7 +1,6 @@
 package com.shoob.letsmodreboot.network;
 
 import com.shoob.letsmodreboot.LetsModReboot;
-import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
@@ -15,7 +14,7 @@ public abstract class MessageBase<REQ extends IMessage> implements IMessage, IMe
             handleServerSide(message, ctx.getServerHandler().playerEntity);
         }
         else{
-            handleClientSide(message, null);
+            handleClientSide(message, LetsModReboot.proxy.getClientPlayer());
         }
         return null;
     }

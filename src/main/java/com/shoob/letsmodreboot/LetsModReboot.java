@@ -1,6 +1,7 @@
 package com.shoob.letsmodreboot;
 
 import com.shoob.letsmodreboot.client.handler.KeyInputEventHandler;
+import com.shoob.letsmodreboot.event.LMREventHandler;
 import com.shoob.letsmodreboot.handler.ConfigurationHandler;
 import com.shoob.letsmodreboot.handler.GuiHandler;
 import com.shoob.letsmodreboot.init.ModBlocks;
@@ -12,10 +13,13 @@ import com.shoob.letsmodreboot.network.NetworkHandler;
 import com.shoob.letsmodreboot.proxy.IProxy;
 import com.shoob.letsmodreboot.reference.Reference;
 import com.shoob.letsmodreboot.util.LogHelper;
+import net.minecraft.client.Minecraft;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLInterModComms;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
@@ -45,6 +49,9 @@ public class LetsModReboot {
         DescriptionHandler.init();
 
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
+
+        MinecraftForge.EVENT_BUS.register(new LMREventHandler());
+
         LogHelper.info("Pre-Initialization Complete!");
     }
 
@@ -62,4 +69,10 @@ public class LetsModReboot {
         LogHelper.info("Post-Initialization Complete!");
     }
 
+
+    @Mod.EventHandler
+    public void onIMCMessages(FMLInterModComms.IMCEvent event){
+        LogHelper.info("Recieving IMC");
+
+    }
 }

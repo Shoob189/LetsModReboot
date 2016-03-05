@@ -13,3 +13,7 @@ item.letsmodreboot:fancyOrb.name=Fancy Orb
 # Blocks
 tile.letsmodreboot:fancyBlock.name=Fancy Block
 tile.letsmodreboot:camoMine.name=Camo Mine
+
+gui.letsmodreboot.camoMine.timer=Timer: %s ticks
+gui.letsmodreboot.camoMine.button.reset=Reset
+gui.letsmodreboot.camoMine.button.restart=Restart

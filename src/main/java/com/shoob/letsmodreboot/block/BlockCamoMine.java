@@ -31,21 +31,24 @@ public class BlockCamoMine extends BlockLMRTileEntity{
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumFacing side, float hitX, float hitY, float hitZ)
     {
         if(!worldIn.isRemote) {
-            playerIn.openGui(LetsModReboot.instance, GuiHandler.GuiIDs.CAMO_MINE.ordinal(), worldIn, pos.getX(), pos.getY(), pos.getZ());
+            if (playerIn.isSneaking()) {
+                playerIn.openGui(LetsModReboot.instance, GuiHandler.GuiIDs.CAMO_MINE.ordinal(), worldIn, pos.getX(), pos.getY(), pos.getZ());
+            } else {
 
-//            TileEntityCamoMine te = (TileEntityCamoMine) worldIn.getTileEntity(pos);
-//            if(te.getCamoStack(side.getIndex()) != null){
-//                ItemStack camoStack = te.getCamoStack(side.getIndex());
-//                te.setCamoStack(null, side.getIndex());
-//                EntityItem itemEntity = new EntityItem(worldIn, pos.getX(),pos.getY(),pos.getZ(), camoStack);
-//                worldIn.spawnEntityInWorld(itemEntity);
-//            } else {
-//                ItemStack playerItem = playerIn.getCurrentEquippedItem();
-//                if(playerItem != null){
-//                    ItemStack camoStack = playerItem.splitStack(1);
-//                    te.setCamoStack(camoStack, side.getIndex());
-//                }
-//            }
+                TileEntityCamoMine te = (TileEntityCamoMine) worldIn.getTileEntity(pos);
+                if (te.getCamoStack(side.getIndex()) != null) {
+                    ItemStack camoStack = te.getCamoStack(side.getIndex());
+                    te.setCamoStack(null, side.getIndex());
+                    EntityItem itemEntity = new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ(), camoStack);
+                    worldIn.spawnEntityInWorld(itemEntity);
+                } else {
+                    ItemStack playerItem = playerIn.getCurrentEquippedItem();
+                    if (playerItem != null) {
+                        ItemStack camoStack = playerItem.splitStack(1);
+                        te.setCamoStack(camoStack, side.getIndex());
+                    }
+                }
+            }
         }
         return true;
     }

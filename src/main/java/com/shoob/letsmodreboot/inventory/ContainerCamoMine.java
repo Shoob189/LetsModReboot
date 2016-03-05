@@ -3,12 +3,16 @@ package com.shoob.letsmodreboot.inventory;
 import com.shoob.letsmodreboot.tileentity.TileEntityCamoMine;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ContainerCamoMine extends ContainerLMR {
 
     private final TileEntityCamoMine te;
+    private int lastTimer = -1;
 
     public ContainerCamoMine(InventoryPlayer playerInventory, TileEntityCamoMine te){
         int x = 62;
@@ -29,6 +33,26 @@ public class ContainerCamoMine extends ContainerLMR {
     @Override
     public boolean canInteractWith(EntityPlayer playerIn) {
         return te.isUseableByPlayer(playerIn);
+    }
+
+    @Override
+    public void detectAndSendChanges(){
+        super.detectAndSendChanges();
+        if(lastTimer != te.getTimer()){
+            for(ICrafting crafter : crafters){
+                crafter.sendProgressBarUpdate(this, 0, te.getTimer());
+            }
+            lastTimer = te.getTimer();
+        }
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void updateProgressBar(int id, int val){
+        super.updateProgressBar(id, val);
+        if(id == 0){
+            te.setTimer(val);
+        }
     }
 
     @Override
