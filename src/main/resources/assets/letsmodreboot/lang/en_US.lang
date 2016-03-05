@@ -2,6 +2,7 @@
 keys.letsmodreboot.category=Let's Mod Reboot
 keys.letsmodreboot.charge=Charge
 keys.letsmodreboot.release=Release
+keys.letsmodreboot.explode=Explode
 
 # Creative Tabs
 itemGroup.letsmodreboot=Let's Mod Reboot
@@ -11,3 +12,4 @@ item.letsmodreboot:fancyOrb.name=Fancy Orb
 
 # Blocks
 tile.letsmodreboot:fancyBlock.name=Fancy Block
+tile.letsmodreboot:camoMine.name=Camo Mine

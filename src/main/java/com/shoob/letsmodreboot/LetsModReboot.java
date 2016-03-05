@@ -2,9 +2,13 @@ package com.shoob.letsmodreboot;
 
 import com.shoob.letsmodreboot.client.handler.KeyInputEventHandler;
 import com.shoob.letsmodreboot.handler.ConfigurationHandler;
+import com.shoob.letsmodreboot.handler.GuiHandler;
 import com.shoob.letsmodreboot.init.ModBlocks;
 import com.shoob.letsmodreboot.init.ModItems;
+import com.shoob.letsmodreboot.init.ModTileEntities;
 import com.shoob.letsmodreboot.init.Recipes;
+import com.shoob.letsmodreboot.network.DescriptionHandler;
+import com.shoob.letsmodreboot.network.NetworkHandler;
 import com.shoob.letsmodreboot.proxy.IProxy;
 import com.shoob.letsmodreboot.reference.Reference;
 import com.shoob.letsmodreboot.util.LogHelper;
@@ -14,6 +18,7 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 @Mod(modid= Reference.MOD_ID, name= Reference.MOD_NAME, version= Reference.MOD_VERSION, guiFactory = Reference.GUI_FACTORY_CLASS)
 public class LetsModReboot {
@@ -34,7 +39,12 @@ public class LetsModReboot {
         ModItems.register();
         ModBlocks.init();
         ModBlocks.register();
+        ModTileEntities.init();
 
+        NetworkHandler.init();
+        DescriptionHandler.init();
+
+        NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
         LogHelper.info("Pre-Initialization Complete!");
     }
 

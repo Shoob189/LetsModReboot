@@ -3,6 +3,8 @@ package com.shoob.letsmodreboot.proxy;
 import com.shoob.letsmodreboot.client.settings.KeyBindings;
 import com.shoob.letsmodreboot.init.ModBlocks;
 import com.shoob.letsmodreboot.init.ModItems;
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 
 public class ClientProxy extends CommonProxy{
@@ -13,8 +15,14 @@ public class ClientProxy extends CommonProxy{
 
     @Override
     public void registerKeybindings() {
-        ClientRegistry.registerKeyBinding(KeyBindings.charge);
-        ClientRegistry.registerKeyBinding(KeyBindings.release);
+        for(KeyBindings key : KeyBindings.values()){
+            ClientRegistry.registerKeyBinding(key.getKeyBind());
+        }
+    }
+
+    @Override
+    public EntityPlayer getClientPlayer() {
+        return Minecraft.getMinecraft().thePlayer;
     }
 
 

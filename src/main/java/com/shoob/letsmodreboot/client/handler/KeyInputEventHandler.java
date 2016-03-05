@@ -1,27 +1,34 @@
 package com.shoob.letsmodreboot.client.handler;
 
 import com.shoob.letsmodreboot.client.settings.KeyBindings;
-import com.shoob.letsmodreboot.reference.Key;
+import com.shoob.letsmodreboot.network.MessageExplode;
+import com.shoob.letsmodreboot.network.NetworkHandler;
 import com.shoob.letsmodreboot.util.LogHelper;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
 
 public class KeyInputEventHandler {
 
-    private static Key getPressedKeyBinding(){
-        if(KeyBindings.charge.isPressed()){
-            return Key.CHARGE;
+    private static KeyBindings getPressedKey(){
+        for(KeyBindings key : KeyBindings.values()){
+            if(key.isPressed()) {
+                return key;
+            }
         }
-        else if(KeyBindings.release.isPressed()){
-            return Key.RELEASE;
-        }
-
-
-        return Key.UNKNOWN;
+        return null;
     }
 
     @SubscribeEvent
-    public void onKeyInputEvent(InputEvent.KeyInputEvent event){
-        LogHelper.info(getPressedKeyBinding());
+    public void onKeyInputEvent(InputEvent.KeyInputEvent event) {
+        KeyBindings key = getPressedKey();
+        if (key != null) {
+            switch (key) {
+                case EXPLODE:
+                    NetworkHandler.sendToServer(new MessageExplode(3.0F)); //Big explosions (15.0+) crash with a concurrent error
+                    break;
+            }
+
+            LogHelper.info(key);
+        }
     }
 }
